@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SmashScore</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <button class="brand" data-go="home">SmashScore</button>
+    <nav>
+      <button id="back-live" data-go="live" hidden>Live Match</button>
+      <button data-go="setup">New Match</button>
+      <button data-go="history">History</button>
+      <button data-go="players">Players</button>
+      <button data-go="leaderboard">Leaderboard</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="view court">
+      <h1>Score every rally.</h1>
+      <p>Live badminton scoring with the rules applied for you.</p>
+      <p id="summary" class="muted"></p>
+      <div class="actions">
+        <button class="primary" data-go="setup">Start New Match</button>
+        <button data-go="history">Match History</button>
+        <button data-go="players">Players</button>
+        <button data-go="leaderboard">Leaderboard</button>
+      </div>
+    </section>
+
+    <section id="setup" class="view" hidden>
+      <h2>New match</h2>
+      <form id="setup-form" class="card">
+        <fieldset>
+          <legend>Match type</legend>
+          <label><input type="radio" name="type" value="singles" checked> Singles</label>
+          <label><input type="radio" name="type" value="doubles"> Doubles</label>
+        </fieldset>
+        <div class="grid">
+          <div>
+            <label for="a1">Side A player</label>
+            <input id="a1" required maxlength="55">
+            <div class="partner" hidden><label for="a2">Side A partner</label><input id="a2" maxlength="55"></div>
+          </div>
+          <div>
+            <label for="b1">Side B player</label>
+            <input id="b1" required maxlength="55">
+            <div class="partner" hidden><label for="b2">Side B partner</label><input id="b2" maxlength="55"></div>
+          </div>
+        </div>
+        <div class="grid">
+          <div><label for="best">Games</label>
+            <select id="best"><option value="1">1 game</option><option value="3" selected>Best of 3</option></select></div>
+          <div><label for="pts">Points per game</label>
+            <select id="pts"><option>11</option><option>15</option><option selected>21</option></select></div>
+        </div>
+        <label for="event">Event name (optional)</label>
+        <input id="event" maxlength="100">
+        <p id="setup-error" class="error" role="alert"></p>
+        <button class="primary" type="submit">Start match</button>
+      </form>
+    </section>
+
+    <section id="live" class="view" hidden>
+      <div class="meta"><span id="game-label"></span><span id="timer">00:00</span></div>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+      <div class="board">
+        <div class="side" id="side-0">
+          <h3 class="name"></h3>
+          <p class="serve">Serving</p>
+          <p class="score">0</p>
+          <p class="games muted"></p>
+          <button class="primary plus" data-side="0">+1</button>
+        </div>
+        <div class="side" id="side-1">
+          <h3 class="name"></h3>
+          <p class="serve">Serving</p>
+          <p class="score">0</p>
+          <p class="games muted"></p>
+          <button class="primary plus" data-side="1">+1</button>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="undo">Undo</button>
+        <button id="reset">Reset game</button>
+        <button id="newmatch">New match</button>
+        <button id="save" class="primary" hidden>Save result</button>
+      </div>
+      <h3>Rally log</h3>
+      <ol id="log" class="log"></ol>
+    </section>
+
+    <section id="history" class="view" hidden><h2>Match history</h2><div class="report"></div></section>
+    <section id="players" class="view" hidden><h2>Players</h2><div class="report"></div></section>
+    <section id="leaderboard" class="view" hidden><h2>Leaderboard</h2><div class="report"></div></section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
